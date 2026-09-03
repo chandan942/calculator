@@ -15,15 +15,15 @@ def calculator():
         result = num1 / num2
     elif operator == '%':
         if num2 == 0:
-            return "Error: Division by zero"
+            return "Error: Module by zero"
         result = num1 % num2
     else:
         return "Error: Invalid operator"
 
     return result
 
-while True:
+again = "y"
+
+while again.lower() == "y":
     print("Result:", calculator())
     again = input("Do you want to calculate again? (y/n): ")
-    if again.lower() != 'y':
-        break
