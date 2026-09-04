@@ -1,8 +1,5 @@
-def calculator():
-    num1 = float(input("Enter first number: "))
-    operator = input("Enter operator (+, -, *, /, %): ")
-    num2 = float(input("Enter second number: "))
-
+# adding the logic so that program remembers the history:
+def calculate(num1, operator, num2):
     if operator == '+':
         result = num1 + num2
     elif operator == '-':
@@ -15,20 +12,28 @@ def calculator():
         result = num1 / num2
     elif operator == '%':
         if num2 == 0:
-            return "Error: Module by zero"
+            return "Error: Modulo by zero"
         result = num1 % num2
     else:
         return "Error: Invalid operator"
 
     return result
 
-again = "y"
 
-while again.lower() == "y":
-    print("Result:", calculator())
-    again = input("Do you want to calculate again? (y/n): ")
+def calculator(history):
+    num1 = float(input("Enter first number: "))
+    operator = input("Enter operator (+, -, *, /, %): ").strip()
+    num2 = float(input("Enter second number: "))
 
-# adding the logic so that program remembers the history:
+    result = calculate(num1, operator, num2)
+
+    if isinstance(result, str):
+        return result
+
+    calculation = f"{num1} {operator} {num2} = {result}"
+    history.append(calculation)
+
+    return result
 
 def calculator(history):
     num1 = float(input("Enter first number: "))
@@ -66,11 +71,12 @@ def show_history(history):
         for number, calculation in enumerate(history, start=1):
             print(f"{number}. {calculation}")
 
+if __name__ == "__main__":
+ 
+  history = []
+  again = "y"
 
-history = []
-again = "y"
-
-while again.lower() == "y":
+  while again.lower() == "y":
     print("\nResult:", calculator(history))
 
     choice = input(
