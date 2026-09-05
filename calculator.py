@@ -1,4 +1,9 @@
 # adding the logic so that program remembers the history:
+import json
+def save_history(history):
+  with open("history.json","w") as file:
+    json.dump(history,file)
+
 def calculate(num1, operator, num2):
     if operator == '+':
         result = num1 + num2
@@ -31,6 +36,7 @@ def calculator(history):
 
   calculation = f"{num1} {operator} {num2} = {result}"
   history.append(calculation)
+  save_history(history)
 
   return result
 
