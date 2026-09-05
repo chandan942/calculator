@@ -1,4 +1,4 @@
-from calculator import calculate, get_valid_number, get_valid_operator
+from calculator import calculate, get_valid_number, get_valid_operator,save_history,load_history
 
 
 def test_addition():
@@ -53,3 +53,16 @@ def test_invalid_operator_then_valid(monkeypatch):
     monkeypatch.setattr("builtins.input", lambda _: next(inputs))
 
     assert get_valid_operator("Enter operator: ") == "+"
+
+def test_save_and_load_history(tmp_path):
+    history = [
+        "10.0 + 5.0 = 15.0",
+        "20.0 * 3.0 = 60.0"
+    ]
+
+    file_path = tmp_path / "history.json"
+
+    save_history(history, file_path)
+    loaded_history = load_history(file_path)
+
+    assert loaded_history == history

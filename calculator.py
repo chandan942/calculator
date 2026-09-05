@@ -1,6 +1,6 @@
 # adding the logic so that program remembers the history:
 import json
-def save_history(history):
+def save_history(history,file_path="history.json"):
   with open("history.json","w") as file:
     json.dump(history,file)
 
@@ -67,37 +67,42 @@ def get_valid_operator(prompt):
             return op
         print(f"Error: Please enter one of {valid_ops}.")
 
+def load_history(file_path="history.json"):
+    try:
+        with open("history.json", "r") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return []
+    
 if __name__ == "__main__":
- 
-  history = []
-  if __name__ == "__main__":
-    history = []
+    history = load_history()
 
-  while True:
-    print("================================")
-    print("          CALCULATOR")
-    print("================================")
-    print()
-    print("1. Calculate")
-    print("2. View History")
-    print("3. Clear History")
-    print("4. Exit")
+    while True:
+        print("================================")
+        print("          CALCULATOR")
+        print("================================")
+        print()
+        print("1. Calculate")
+        print("2. View History")
+        print("3. Clear History")
+        print("4. Exit")
 
-    choice = input("Choose an option: ")
+        choice = input("Choose an option: ")
 
-    if choice == "1":
-        print("\nResult:", calculator(history))
+        if choice == "1":
+            print("\nResult:", calculator(history))
 
-    elif choice == "2":
-        show_history(history)
+        elif choice == "2":
+            show_history(history)
 
-    elif choice == "3":
-        history.clear()
-        print("\nHistory cleared.")
+        elif choice == "3":
+            history.clear()
+            save_history(history)
+            print("\nHistory cleared.")
 
-    elif choice == "4":
-        print("\nGoodbye!")
-        break
+        elif choice == "4":
+            print("\nGoodbye!")
+            break
 
-    else:
-        print("\nInvalid choice. Please select 1-4.")
+        else:
+            print("\nInvalid choice. Please select 1-4.")
