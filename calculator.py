@@ -37,10 +37,11 @@ def calculator(history):
 def show_history(history):
     if not history:
         print("\nNo calculation history available.")
-        return 
-        print("\nCalculation History:")
-        for number, calculation in enumerate(history, start=1):
-            print(f"{number}. {calculation}")
+        return
+
+    print("\nCalculation History:")
+    for number, calculation in enumerate(history, start=1):
+        print(f"{number}. {calculation}")
 
 def get_valid_number(prompt):
     """Keeps asking until the user enters a valid number."""
@@ -63,16 +64,34 @@ def get_valid_operator(prompt):
 if __name__ == "__main__":
  
   history = []
-  again = "y"
+  if __name__ == "__main__":
+    history = []
 
-  while again.lower() == "y":
-    print("\nResult:", calculator(history))
+  while True:
+    print("================================")
+    print("          CALCULATOR")
+    print("================================")
+    print()
+    print("1. Calculate")
+    print("2. View History")
+    print("3. Clear History")
+    print("4. Exit")
 
-    choice = input(
-        "\nEnter 'h' to view history, or press Enter to continue: "
-    )
+    choice = input("Choose an option: ")
 
-    if choice.lower() == "h":
+    if choice == "1":
+        print("\nResult:", calculator(history))
+
+    elif choice == "2":
         show_history(history)
 
-    again = input("\nDo you want to calculate again? (y/n): ")
+    elif choice == "3":
+        history.clear()
+        print("\nHistory cleared.")
+
+    elif choice == "4":
+        print("\nGoodbye!")
+        break
+
+    else:
+        print("\nInvalid choice. Please select 1-4.")
