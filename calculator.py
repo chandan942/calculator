@@ -28,6 +28,10 @@ def calculate(num1, operator, num2):
 
     return result
 
+def format_result(result):
+    if isinstance(result, float) and result.is_integer():
+        return int(result)
+    return result
 
 def calculator(history):
   num1 = get_valid_number("Enter first number: ")
@@ -38,6 +42,8 @@ def calculator(history):
   if isinstance(result, str):
       return result
 
+  result = format_result(result)
+  
   calculation = f"{num1} {operator} {num2} = {result}"
   history.append(calculation)
   save_history(history)
