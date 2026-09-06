@@ -43,7 +43,7 @@ def calculator(history):
       return result
 
   result = format_result(result)
-  
+
   calculation = f"{num1} {operator} {num2} = {result}"
   history.append(calculation)
   save_history(history)
@@ -83,40 +83,73 @@ def load_history(file_path="history.json"):
             return json.load(file)
     except (FileNotFoundError,json.JSONDecodeError):
         return []
-    
+
+def delete_history(history):
+    if not history:
+        print("\nNo calculation history available.")
+        return
+
+    show_history(history)
+
+    choice = input("\nEnter history number to delete: ")
+
+    try:
+        number = int(choice)
+    except ValueError:
+        print("\nInvalid number.")
+        return
+
+    index = number - 1
+
+    if index < 0 or index >= len(history):
+        print("\nHistory number doesn't exist.")
+        return
+
+    deleted = history.pop(index)
+    save_history(history)
+
+    print(f"\nDeleted: {deleted}")
+
 if __name__ == "__main__":
     history = load_history()
 
-    while True:
-        clear_screen()
-        print("================================")
-        print("          CALCULATOR")
-        print("================================")
-        print()
-        print("1. Calculate")
-        print("2. View History")
-        print("3. Clear History")
-        print("4. Exit")
+while True:
+    clear_screen()
 
-        choice = input("Choose an option: ")
+    print("================================")
+    print("          CALCULATOR")
+    print("================================")
+    print()
+    print("1. Calculate")
+    print("2. View History")
+    print("3. Delete History Item")
+    print("4. Clear History")
+    print("5. Exit")
 
-        if choice == "1":
-            print("\nResult:", calculator(history))
-            input("\nPress Enter to continue...")
+    choice = input("Choose an option: ")
 
-        elif choice == "2":
-            show_history(history)
-            input("\nPress Enter to continue...")
+    if choice == "1":
+        print("\nResult:", calculator(history))
+        input("\nPress Enter to continue...")
 
-        elif choice == "3":
-            history.clear()
-            save_history(history)
-            print("\nHistory cleared.")
-            input("\nPress Enter to continue...")
+    elif choice == "2":
+        show_history(history)
+        input("\nPress Enter to continue...")
 
-        elif choice == "4":
-            print("\nGoodbye!")
-            break
+    elif choice == "3":
+        delete_history(history)
+        input("\nPress Enter to continue...")
 
-        else:
-            print("\nInvalid choice. Please select 1-4.")
+    elif choice == "4":
+        history.clear()
+        save_history(history)
+        print("\nHistory cleared.")
+        input("\nPress Enter to continue...")
+
+    elif choice == "5":
+        print("\nGoodbye!")
+        break
+
+    else:
+        print("\nInvalid choice. Please select 1-5.")
+        input("\nPress Enter to continue...")
