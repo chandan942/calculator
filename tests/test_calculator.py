@@ -66,3 +66,10 @@ def test_save_and_load_history(tmp_path):
     loaded_history = load_history(file_path)
 
     assert loaded_history == history
+
+def test_load_history_when_file_does_not_exist(tmp_path):
+    file_path = tmp_path / "missing.json"
+
+    result = load_history(file_path)
+
+    assert result == []

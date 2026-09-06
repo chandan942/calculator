@@ -1,7 +1,7 @@
 # adding the logic so that program remembers the history:
 import json
 def save_history(history,file_path="history.json"):
-  with open("history.json","w") as file:
+  with open(file_path,"w") as file:
     json.dump(history,file)
 
 def calculate(num1, operator, num2):
@@ -69,7 +69,7 @@ def get_valid_operator(prompt):
 
 def load_history(file_path="history.json"):
     try:
-        with open("history.json", "r") as file:
+        with open(file_path, "r") as file:
             return json.load(file)
     except FileNotFoundError:
         return []
