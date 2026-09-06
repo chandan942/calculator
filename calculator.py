@@ -113,43 +113,43 @@ def delete_history(history):
 if __name__ == "__main__":
     history = load_history()
 
-while True:
-    clear_screen()
+    while True:
+        clear_screen()
 
-    print("================================")
-    print("          CALCULATOR")
-    print("================================")
-    print()
-    print("1. Calculate")
-    print("2. View History")
-    print("3. Delete History Item")
-    print("4. Clear History")
-    print("5. Exit")
+        print("================================")
+        print("          CALCULATOR")
+        print("================================")
+        print()
+        print("1. Calculate")
+        print("2. View History")
+        print("3. Delete History Item")
+        print("4. Clear History")
+        print("5. Exit")
 
-    choice = input("Choose an option: ")
+        choice = input("Choose an option: ")
 
-    if choice == "1":
-        print("\nResult:", calculator(history))
-        input("\nPress Enter to continue...")
+        if choice == "1":
+            print("\nResult:", calculator(history))
+            input("\nPress Enter to continue...")
 
-    elif choice == "2":
-        show_history(history)
-        input("\nPress Enter to continue...")
+        elif choice == "2":
+            show_history(history)
+            input("\nPress Enter to continue...")
 
-    elif choice == "3":
-        delete_history(history)
-        input("\nPress Enter to continue...")
+        elif choice == "3":
+            delete_history(history)
+            input("\nPress Enter to continue...")
 
-    elif choice == "4":
-        history.clear()
-        save_history(history)
-        print("\nHistory cleared.")
-        input("\nPress Enter to continue...")
+        elif choice == "4":
+            history.clear()
+            save_history(history)
+            print("\nHistory cleared.")
+            input("\nPress Enter to continue...")
 
-    elif choice == "5":
-        print("\nGoodbye!")
-        break
+        elif choice == "5":
+            print("\nGoodbye!")
+            break
 
-    else:
-        print("\nInvalid choice. Please select 1-5.")
-        input("\nPress Enter to continue...")
+        else:
+            print("\nInvalid choice. Please select 1-5.")
+            input("\nPress Enter to continue...")

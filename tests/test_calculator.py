@@ -1,4 +1,4 @@
-from calculator import calculate, get_valid_number, get_valid_operator,save_history,load_history
+from calculator import calculate, get_valid_number, get_valid_operator,save_history,load_history,delete_history
 
 
 def test_addition():
@@ -82,3 +82,19 @@ def test_load_history_with_corrupted_file(tmp_path):
     result = load_history(file_path)
 
     assert result == []
+
+def test_delete_history_item(monkeypatch):
+    history = [
+        "10.0 + 5.0 = 15",
+        "20.0 * 3.0 = 60",
+        "50.0 - 7.0 = 43"
+    ]
+
+    monkeypatch.setattr("builtins.input", lambda _: "2")
+
+    delete_history(history)
+
+    assert history == [
+        "10.0 + 5.0 = 15",
+        "50.0 - 7.0 = 43"
+    ]
