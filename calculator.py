@@ -71,7 +71,7 @@ def load_history(file_path="history.json"):
     try:
         with open(file_path, "r") as file:
             return json.load(file)
-    except FileNotFoundError:
+    except (FileNotFoundError,json.JSONDecodeError):
         return []
     
 if __name__ == "__main__":

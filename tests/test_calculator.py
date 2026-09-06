@@ -73,3 +73,12 @@ def test_load_history_when_file_does_not_exist(tmp_path):
     result = load_history(file_path)
 
     assert result == []
+
+def test_load_history_with_corrupted_file(tmp_path):
+    file_path = tmp_path / "history.json"
+
+    file_path.write_text("this is not valid json")
+
+    result = load_history(file_path)
+
+    assert result == []
