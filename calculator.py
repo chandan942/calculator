@@ -1,5 +1,9 @@
 # adding the logic so that program remembers the history:
+import os
 import json
+def clear_screen():
+    os.system("cls" if os.name == "nt" else "clear")
+
 def save_history(history,file_path="history.json"):
   with open(file_path,"w") as file:
     json.dump(history,file)
@@ -78,6 +82,7 @@ if __name__ == "__main__":
     history = load_history()
 
     while True:
+        clear_screen()
         print("================================")
         print("          CALCULATOR")
         print("================================")
@@ -91,14 +96,17 @@ if __name__ == "__main__":
 
         if choice == "1":
             print("\nResult:", calculator(history))
+            input("\nPress Enter to continue...")
 
         elif choice == "2":
             show_history(history)
+            input("\nPress Enter to continue...")
 
         elif choice == "3":
             history.clear()
             save_history(history)
             print("\nHistory cleared.")
+            input("\nPress Enter to continue...")
 
         elif choice == "4":
             print("\nGoodbye!")
