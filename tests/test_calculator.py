@@ -98,3 +98,18 @@ def test_delete_history_item(monkeypatch):
         "10.0 + 5.0 = 15",
         "50.0 - 7.0 = 43"
     ]
+
+def test_delete_invalid_history_number(monkeypatch):
+    history = [
+        "10.0 + 5.0 = 15",
+        "20.0 * 3.0 = 60"
+    ]
+
+    monkeypatch.setattr("builtins.input", lambda _: "99")
+
+    delete_history(history)
+
+    assert history == [
+        "10.0 + 5.0 = 15",
+        "20.0 * 3.0 = 60"
+    ]
