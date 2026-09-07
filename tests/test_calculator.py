@@ -1,4 +1,4 @@
-from calculator import calculate, get_valid_number, get_valid_operator,save_history,load_history,delete_history
+from calculator import calculate, get_valid_number, get_valid_operator,save_history,load_history,delete_history,clear_history
 
 
 def test_addition():
@@ -108,6 +108,50 @@ def test_delete_invalid_history_number(monkeypatch):
     monkeypatch.setattr("builtins.input", lambda _: "99")
 
     delete_history(history)
+
+    assert history == [
+        "10.0 + 5.0 = 15",
+        "20.0 * 3.0 = 60"
+    ]
+
+def test_clear_history_confirmed(monkeypatch):
+    history = [
+        "10.0 + 5.0 = 15",
+        "20.0 * 3.0 = 60"
+    ]
+
+    monkeypatch.setattr("builtins.input", lambda _: "y")
+
+    clear_history(history)
+
+    assert history == []
+
+
+def test_clear_history_cancelled(monkeypatch):
+    history = [
+        "10.0 + 5.0 = 15",
+        "20.0 * 3.0 = 60"
+    ]
+
+    monkeypatch.setattr("builtins.input", lambda _: "n")
+
+    clear_history(history)
+
+    assert history == [
+        "10.0 + 5.0 = 15",
+        "20.0 * 3.0 = 60"
+    ]
+
+
+def test_clear_history_invalid_choice(monkeypatch):
+    history = [
+        "10.0 + 5.0 = 15",
+        "20.0 * 3.0 = 60"
+    ]
+
+    monkeypatch.setattr("builtins.input", lambda _: "x")
+
+    clear_history(history)
 
     assert history == [
         "10.0 + 5.0 = 15",

@@ -1,6 +1,25 @@
 # adding the logic so that program remembers the history:
 import os
 import json
+def clear_history(history):
+    confirm = input(
+        "\nAre you sure you want to clear all history? (y/n): "
+    ).strip().lower()
+
+    if confirm == "y":
+        history.clear()
+        save_history(history)
+        print("\nHistory cleared.")
+        return True
+
+    elif confirm == "n":
+        print("\nHistory was not cleared.")
+        return False
+
+    else:
+        print("\nInvalid choice. Please enter y or n.")
+        return False
+    
 def clear_screen():
     os.system("cls" if os.name == "nt" else "clear")
 
@@ -139,20 +158,7 @@ if __name__ == "__main__":
         elif choice == "3":
             delete_history(history)
             input("\nPress Enter to continue...")
+
         elif choice == "4":
-            confirm = input(
-                "\nAre you sure you want to clear all history? (y/n): "
-            ).strip().lower()
-
-            if confirm == "y":
-                history.clear()
-                save_history(history)
-                print("\nHistory cleared.")
-
-            elif confirm == "n":
-                print("\nHistory was not cleared.")
-
-            else:
-                print("\nInvalid choice. Please enter y or n.")
-
-                input("\nPress Enter to continue...")
+             clear_history(history)
+             input("\nPress Enter to continue...")
