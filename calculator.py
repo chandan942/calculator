@@ -139,17 +139,20 @@ if __name__ == "__main__":
         elif choice == "3":
             delete_history(history)
             input("\nPress Enter to continue...")
-
         elif choice == "4":
-            history.clear()
-            save_history(history)
-            print("\nHistory cleared.")
-            input("\nPress Enter to continue...")
+            confirm = input(
+                "\nAre you sure you want to clear all history? (y/n): "
+            ).strip().lower()
 
-        elif choice == "5":
-            print("\nGoodbye!")
-            break
+            if confirm == "y":
+                history.clear()
+                save_history(history)
+                print("\nHistory cleared.")
 
-        else:
-            print("\nInvalid choice. Please select 1-5.")
-            input("\nPress Enter to continue...")
+            elif confirm == "n":
+                print("\nHistory was not cleared.")
+
+            else:
+                print("\nInvalid choice. Please enter y or n.")
+
+                input("\nPress Enter to continue...")
